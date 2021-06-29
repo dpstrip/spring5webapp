@@ -1,8 +1,9 @@
 package guru.springframework.spring5webapp.domain;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import com.sun.org.apache.xpath.internal.objects.XString;
+//import com.sun.org.apache.xpath.internal.objects.XString;
 
 import javax.persistence.*;
 
@@ -29,16 +30,15 @@ public class Author {
     }
 
     @ManyToMany(mappedBy = "authors")
-    private Set<Book> books;
+    private Set<Book> books = new HashSet<>();
 
     public Author() {
     }
 
-    public Author(String firstName, String lastName, Set<Book> books) {
+    public Author(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.books = books;
-    }
+     }
 
     public String getFirstName() {
         return firstName;
