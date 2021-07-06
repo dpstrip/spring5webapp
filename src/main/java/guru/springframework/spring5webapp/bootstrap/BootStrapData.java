@@ -9,6 +9,8 @@ import guru.springframework.spring5webapp.repositories.PublisherRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
+
 @Component
 public class BootStrapData implements CommandLineRunner {
 
@@ -42,13 +44,18 @@ public class BootStrapData implements CommandLineRunner {
         bookRepository.save(noEJB);
 
         Publisher pub1 = new Publisher("McMillin", "123 Know your way", "st. Louis", "Mo","62233");
-        pubRepository.save(pub1);
         Publisher pub2 = new Publisher("Penguin", "cold Dr.", "San Diego", "CA","92777");
-        pubRepository.save(pub2);
 
+        ddd.setPublisher(pub1);
+        pub1.getBooks().add(ddd);
+        noEJB.setPublisher(pub1);
+        pub1.getBooks().add(noEJB);
+
+        pubRepository.save(pub1);
+        pubRepository.save(pub2);
 
         System.out.println("Started in Bootstrap");
         System.out.println("Number of books: " + bookRepository.count());
-        System.out.println("Number of Publishers: " + pubRepository.count());
+        System.out.println("Number of Publishers: " + pub1.getBooks().size());
     }
 }
